@@ -129,7 +129,7 @@ namespace RPG
             do
             {
                 input = 0;
-                Console.WriteLine("Select your Class: 1 = Berserker || 2 = Defender");
+                Console.WriteLine("Select your Class: 1 = Berserker || 2 = Defender || 3 = Class Descriptions");
 
                 try
                 {
@@ -155,20 +155,29 @@ namespace RPG
                         Attack = 100;
                         MaxHealth = 150;
                     }
+                    else if (input == 3)
+                    {
+                        Game.ClassDescriptions();
+                        SelectClass();
+                    }
                     else
                     {
                         Game.DisplayError();
                     } 
                 }
               
-            } while (input != 1 && input != 2);//keep asking until input is valid
+            } while (input != 1 && input != 2 && input != 3);//keep asking until input is valid
 
-            Xp = 0;
-            RequiredXP = 100;
-            Level = 1;
-            Health = MaxHealth;
+            if (input != 3)
+            {
+                Xp = 0;
+                RequiredXP = 100;
+                Level = 1;
+                Health = MaxHealth;
 
-            Console.WriteLine($"You have chosen the {ClassName} class");
+                Console.WriteLine($"You have chosen the {ClassName} class");
+            }
+            
 
         }//Initializes player's starting stats
         public void DisplayStats()//Displays player stats at top (with multi-colors)
@@ -350,5 +359,6 @@ namespace RPG
             Console.WriteLine("Health");
 
         }
+
     }
 } 

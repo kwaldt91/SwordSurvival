@@ -19,6 +19,29 @@ namespace RPG
             Console.ResetColor();
         }//Displays Title on start
 
+        public static void ClassDescriptions()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Berserker: ");
+            Console.ResetColor();
+            Console.WriteLine("The Berserker charges into battle with no fear. \nWhat he lacks in armor and defense, he makes up for in terrrifying agrression and brute force.");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            LineBreak();
+            Console.WriteLine("(High attack, Low defense)");
+            Console.ResetColor();
+            LineBreak();
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Defender: ");
+            Console.ResetColor();
+            Console.WriteLine("The Defender is equipped with a giant shield and heavy armor. \nHowever, the giant shield requires two hands, leaving no room for a sword");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            LineBreak();
+            Console.WriteLine("(Low attack, High defense)");
+            Console.ResetColor();
+            LineBreak();
+        }
+
         public static void Segment()
         {
             Console.WriteLine(divider);
