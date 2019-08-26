@@ -14,7 +14,7 @@ namespace RPG
         public static void Welcome()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("D==|=======> SWORD SURVIVIAL <=======}==D");
+            Console.WriteLine("D==[=======> SWORD SURVIVIAL <=======}==D");
             Segment();
             Console.ResetColor();
         }//Displays Title on start
@@ -41,7 +41,7 @@ namespace RPG
                 do
                 {
                     input = 0;
-                    Console.WriteLine("What will you do?: 1 = Attack || 2 = Run! (costs 10xp)");
+                    Console.WriteLine("What will you do?: 1 = Attack || 2 = Run!");
                     try
                     {
                         input = int.Parse(Console.ReadLine());

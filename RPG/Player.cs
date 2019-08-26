@@ -278,10 +278,12 @@ namespace RPG
 
         public void LoseXP()
         {
-            Xp -= 10;
+            Random rand = new Random();
+            int lostXP = rand.Next(10, RequiredXP);
+            Xp -= lostXP;
             Console.ForegroundColor = ConsoleColor.Red;
             Game.LineBreak();
-            Console.WriteLine("You lost 10 XP");        
+            Console.WriteLine($"You lost {lostXP} XP");        
             Console.ResetColor();
             Game.LineBreak();
         }//Lose xp when running
@@ -327,7 +329,7 @@ namespace RPG
         public void RecoverHealthFromRun()
         {
             Random rand = new Random();
-            int recoveredHealth = rand.Next(5, 45);
+            int recoveredHealth = rand.Next(5, 35);
 
             Console.Write("You recovered ");
             Console.ForegroundColor = ConsoleColor.Blue;
