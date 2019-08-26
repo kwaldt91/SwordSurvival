@@ -24,7 +24,7 @@ namespace RPG
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Berserker: ");
             Console.ResetColor();
-            Console.WriteLine("The Berserker charges into battle with no fear. \nWhat he lacks in armor and defense, he makes up for in terrrifying agrression and brute force.");
+            Console.WriteLine("The Berserker charges into battle with dual swords and no armor. \nWhat he lacks in armor and defense, he makes up for in terrrifying agrression and brute force.");
             Console.ForegroundColor = ConsoleColor.Blue;
             LineBreak();
             Console.WriteLine("(High attack, Low defense)");
@@ -38,6 +38,16 @@ namespace RPG
             Console.ForegroundColor = ConsoleColor.Blue;
             LineBreak();
             Console.WriteLine("(Low attack, High defense)");
+            Console.ResetColor();
+            LineBreak();
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Rogue: ");
+            Console.ResetColor();
+            Console.WriteLine("The Rogue wears thick leather armor and is equipped with a light shield and sword, \nmaking him a well rounded combatant");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            LineBreak();
+            Console.WriteLine("(Moderate attack, Moderate defense)");
             Console.ResetColor();
             LineBreak();
         }
