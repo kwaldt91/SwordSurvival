@@ -111,6 +111,21 @@ namespace RPG
                     }
                     break;
 
+                case "Owl":
+
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    if (Health > 0)
+                    {
+                        Console.WriteLine("m{o>o}m");
+                    }
+                    else
+                    {
+                        Console.WriteLine("m{x>x}m");
+                    }
+
+                    break;
+
+
                 case "Goblin":
 
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -168,13 +183,20 @@ namespace RPG
                     monsterAttack = rand.Next(75, 100);
                     monsterHealth = rand.Next(175, 200);
                     monsterXp = rand.Next(100, 125);
+                    EnemyName = "Owl";
+                    break;
+
+                case 4:
+                    monsterAttack = rand.Next(100, 125);
+                    monsterHealth = rand.Next(200, 225);
+                    monsterXp = rand.Next(125, 150);
                     EnemyName = "Goblin";
                     break;
 
                 default:
-                    monsterAttack = rand.Next(100, 125);
-                    monsterHealth = rand.Next(200, 225);
-                    monsterXp = rand.Next(125, 150); ;
+                    monsterAttack = rand.Next(125, 150);
+                    monsterHealth = rand.Next(225, 250);
+                    monsterXp = rand.Next(150, 175); ;
                     EnemyName = "Robot";
                     break;
             }
