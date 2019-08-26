@@ -326,10 +326,13 @@ namespace RPG
 
         public void RecoverHealthFromRun()
         {
+            Random rand = new Random();
+            int recoveredHealth = rand.Next(5, 45);
+
             Console.Write("You recovered ");
             Console.ForegroundColor = ConsoleColor.Blue;
 
-            if (Health + 20 > MaxHealth)//stops health from exceeding MAxHealth
+            if (Health + recoveredHealth > MaxHealth)//stops health from exceeding MaxHealth
             {
                 int remainingHealth = MaxHealth - Health;
                 Health += remainingHealth;                          
@@ -337,8 +340,8 @@ namespace RPG
             }
             else
             {
-                Health += 20;            
-                Console.Write("20 ");               
+                Health += recoveredHealth;            
+                Console.Write(recoveredHealth + " ");               
             }
 
             Console.ResetColor();
@@ -346,4 +349,4 @@ namespace RPG
 
         }
     }
-}
+} 
