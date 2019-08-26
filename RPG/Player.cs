@@ -9,13 +9,15 @@ namespace RPG
     class Player
     {
         private string className;
-        private int attack;
+        private int attack;      
         private int maxHealth;
         private int health;
         private int xp;
         private int requiredXP;
         private int leftOverXp; //Xp gained from monster kill that remains after leveling up
         private int level;
+        private string attackVerb; //string that represents the action taken when attacking
+        private string weapon; //emoticon representing the player's weapon;
 
         //Properties///////////
         public string ClassName
@@ -120,6 +122,33 @@ namespace RPG
                 leftOverXp = value;
             }
         }
+
+        public string AttackVerb
+        {
+            get
+            {
+                return attackVerb;
+            }
+
+            set
+            {
+                attackVerb = value;
+            }
+        }
+
+        public string Weapon
+        {
+            get
+            {
+                return weapon;
+            }
+
+            set
+            {
+                weapon = value;
+            }
+        }
+
         ///////////////////////////
 
         public void SelectClass()
@@ -147,6 +176,8 @@ namespace RPG
                         ClassName = "Berserker";
                         Attack = 150;
                         MaxHealth = 100;
+                        AttackVerb = "whack";
+                        Weapon = "===[]";
 
                     }
                     else if (input == 2)
@@ -154,13 +185,16 @@ namespace RPG
                         ClassName = "Defender";
                         Attack = 100;
                         MaxHealth = 150;
+                        AttackVerb = "bash";
+                        Weapon = "|=_=|";
                     }
                     else if (input == 3)
                     {
                         ClassName = "Rogue";
                         Attack = 125;
                         MaxHealth = 125;
-
+                        AttackVerb = "stab";
+                        Weapon = "<=[==>";
                     }
                     else if (input == 4)
                     {
@@ -173,7 +207,7 @@ namespace RPG
                     } 
                 }
               
-            } while (input < 1 && input < 4);//keep asking until input is valid
+            } while (input != 1 && input != 2 && input != 3 && input != 4);//keep asking until input is valid
 
             if (input != 4)
             {
@@ -195,6 +229,7 @@ namespace RPG
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.Write(ClassName);
+            Console.Write(" " + Weapon);
 
             Console.ResetColor();            
             Console.Write(" | Attack: ");
