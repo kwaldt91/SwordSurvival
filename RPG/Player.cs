@@ -145,7 +145,7 @@ namespace RPG
                     if (input == 1)
                     {
                         ClassName = "Berserker";
-                        Attack = 125;
+                        Attack = 150;
                         MaxHealth = 100;
 
                     }
@@ -153,7 +153,7 @@ namespace RPG
                     {
                         ClassName = "Defender";
                         Attack = 100;
-                        MaxHealth = 125;
+                        MaxHealth = 150;
                     }
                     else
                     {
@@ -193,7 +193,7 @@ namespace RPG
             {
                 Console.ForegroundColor = ConsoleColor.Green;
             }
-            else if (Health < MaxHealth / 2 && Health > MaxHealth / 3)
+            else if (Health <= MaxHealth / 2 && Health >= MaxHealth / 3)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
             }
@@ -279,7 +279,7 @@ namespace RPG
         public void LoseXP()
         {
             Random rand = new Random();
-            int lostXP = rand.Next(10, RequiredXP);
+            int lostXP = rand.Next(10, Xp/2);
             Xp -= lostXP;
             Console.ForegroundColor = ConsoleColor.Red;
             Game.LineBreak();
@@ -329,7 +329,7 @@ namespace RPG
         public void RecoverHealthFromRun()
         {
             Random rand = new Random();
-            int recoveredHealth = rand.Next(5, 35);
+            int recoveredHealth = rand.Next(10, MaxHealth);
 
             Console.Write("You recovered ");
             Console.ForegroundColor = ConsoleColor.Blue;

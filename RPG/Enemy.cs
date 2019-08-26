@@ -85,6 +85,19 @@ namespace RPG
 
             switch(enemyName)
             {
+                case "Dumb Fish":
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    if (Health > 0)
+                    {
+                        Console.WriteLine("><>");
+                    }
+                    else
+                    {
+                        Console.WriteLine("><x>");
+                    }
+                    break;
+
                 case "Spider":
 
                     Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -153,6 +166,63 @@ namespace RPG
                     }
 
                     break;
+
+                case "Cursed Sword":
+
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    if (Health > 0)
+                    {
+                        Console.Write("D=[");
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("===>");
+                    }
+                    else
+                    {
+                        Console.Write("D=[");
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("XXX>");
+                    }
+
+                    break;
+
+                case "Cursed Hammer":
+
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    if (Health > 0)
+                    {
+                        Console.Write("====");
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("[]");
+                    }
+                    else
+                    {
+                        Console.Write("=XX=");
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("[X]");
+                    }
+
+                    break;
+
+                case "Cursed Staff":
+
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    if (Health > 0)
+                    {
+                        Console.Write("@");
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.WriteLine("~)~~~");
+                    }
+                    else
+                    {
+                        Console.Write("=XX=");
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("[X]");
+                    }
+
+                    break;
+
+
+
             }
             
         }//Displays the enemy (emoji)
@@ -168,37 +238,66 @@ namespace RPG
                 case 1:
                     monsterAttack = rand.Next(25, 50);
                     monsterHealth = rand.Next(125, 150);
-                    monsterXp = rand.Next(25,50);
-                    EnemyName = "Spider";
+                    monsterXp = rand.Next(25, 50);
+                    EnemyName = "Dumb Fish";
                     break;
 
                 case 2:
                     monsterAttack = rand.Next(50, 75);
                     monsterHealth = rand.Next(150, 175);
                     monsterXp = rand.Next(50, 75);
-                    EnemyName = "Bat";
+                    EnemyName = "Spider";
                     break;
 
                 case 3:
                     monsterAttack = rand.Next(75, 100);
                     monsterHealth = rand.Next(175, 200);
-                    monsterXp = rand.Next(100, 125);
-                    EnemyName = "Owl";
+                    monsterXp = rand.Next(75, 100);
+                    EnemyName = "Bat";
                     break;
 
                 case 4:
                     monsterAttack = rand.Next(100, 125);
                     monsterHealth = rand.Next(200, 225);
+                    monsterXp = rand.Next(100, 125);
+                    EnemyName = "Owl";
+                    break;
+
+                case 5:
+                    monsterAttack = rand.Next(125, 150);
+                    monsterHealth = rand.Next(225, 250);
                     monsterXp = rand.Next(125, 150);
                     EnemyName = "Goblin";
                     break;
 
-                default:
-                    monsterAttack = rand.Next(125, 150);
-                    monsterHealth = rand.Next(225, 250);
+                case 6:
+                    monsterAttack = rand.Next(150, 175);
+                    monsterHealth = rand.Next(250, 275);
                     monsterXp = rand.Next(150, 175); ;
                     EnemyName = "Robot";
                     break;
+
+                case 7:
+                    monsterAttack = rand.Next(175, 200);
+                    monsterHealth = rand.Next(275, 300);
+                    monsterXp = rand.Next(175, 200); ;
+                    EnemyName = "Cursed Sword";
+                    break;
+
+                case 8:
+                    monsterAttack = rand.Next(200, 225);
+                    monsterHealth = rand.Next(300, 325);
+                    monsterXp = rand.Next(200, 225); ;
+                    EnemyName = "Cursed Hammer";
+                    break;
+
+                default:
+                    monsterAttack = rand.Next(225, 250);
+                    monsterHealth = rand.Next(325, 350);
+                    monsterXp = rand.Next(225, 250); ;
+                    EnemyName = "Cursed Staff";
+                    break;
+
             }
 
             Attack = monsterAttack;
