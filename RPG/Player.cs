@@ -200,8 +200,11 @@ namespace RPG
             do
             {
                 input = 0;
-                Console.WriteLine("Select your Class: \n1 = Berserker || 2 = Defender || 3 = Rogue || 4 = Wizard || 5 = Class Descriptions");
-
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Select your Class: ");
+                Console.ResetColor();
+                Console.WriteLine("1 = Berserker || 2 = Defender || 3 = Rogue || 4 = Wizard || 5 = Class Descriptions");
+            
                 try
                 {
                     input = int.Parse(Console.ReadLine());

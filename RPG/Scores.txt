@@ -1,0 +1,6 @@
+﻿Player Name ------------ Class ------------ Monsters Slain ------------ Level Reached
+Kevin                    Berserker          31                           4
+Bob Johnson              Defender           7                            2
+Gary                     Rogue              16                           4
+Loser Boy                Wizard             2                            1
+Cool Dude                Berserker          0                            1

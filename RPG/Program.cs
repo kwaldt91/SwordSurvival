@@ -31,14 +31,14 @@ namespace RPG
              
                 if (player.Health <= 0) //end game if player runs out of health
                 {
-                    Game.GameOver(player.Level);
+                    Game.GameOver(player);
                     return; //Exits the game
                 }
                
             } while (Game.PlayOrQuit()); //Keep spawning enemies while player chooses to continue
 
             player.DisplayStats();
-            Game.GameOver(player.Level); //end game if player chooses not to continue;
+            Game.GameOver(player); //end game if player chooses not to continue;
         }
 
         

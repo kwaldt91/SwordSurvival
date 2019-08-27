@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace RPG
 {
@@ -260,14 +261,17 @@ namespace RPG
             Console.WriteLine();
         }//Adds space between lines of text
 
-        public static void GameOver(int playerLevel)
+        public static void GameOver(Player player)
         {
+            string name;
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("D==|=======> GAME OVER <=======}==D");
-            LineBreak();
+            Console.Write("Enter your name: ");
+            name = Console.ReadLine();
+            LineBreak();         
+            WriteScore(name, player.ClassName, monstersSlain, player.Level);
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Monsters Slain: {monstersSlain}");
-            Console.WriteLine($"Level Reached: {playerLevel}");
+            ReadScores();
             Console.ForegroundColor = ConsoleColor.Cyan;
             LineBreak();
             Console.WriteLine("Press any key to exit...");
@@ -277,8 +281,77 @@ namespace RPG
 
         public static void DisplayError()
         {
-            Console.WriteLine("Invalid input..Enter 1 or 2");
+            Console.WriteLine("Invalid input..Try again");
             LineBreak();
         }//Displays error to user if input is invalid
+
+        public static void WriteScore(string name, string className, int monstersSlain, int levelReached)
+        {
+            int spaces = 25;
+            int spaceRemaining = 0;
+            try
+            {
+                StreamWriter sw = new StreamWriter("C:\\Learning\\RPG\\RPG\\Scores.txt", true);
+
+                sw.Write(name);
+                spaceRemaining = spaces - name.Length;
+
+                for(int i = 0; i < spaceRemaining; i++)
+                {
+                    sw.Write(" ");
+                }
+
+                sw.Write(className);
+
+                spaces = 19;
+                spaceRemaining = spaces - className.Length;
+
+                for (int j = 0; j < spaceRemaining; j++)
+                {
+                    sw.Write(" ");
+                }
+
+                spaces = 29;
+                spaceRemaining = spaces - monstersSlain.ToString().Length;
+
+                sw.Write(monstersSlain);
+
+                for (int k = 0; k < spaceRemaining; k++)
+                {
+                    sw.Write(" ");
+                }
+
+                sw.WriteLine(levelReached);
+
+                sw.Close();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+        }//write score to text file
+
+        public static void ReadScores()
+        {
+            string line;
+            try
+            {         
+                StreamReader sr = new StreamReader("C:\\Learning\\RPG\\RPG\\Scores.txt");            
+                line = sr.ReadLine();
+ 
+                while (line != null)
+                {                 
+                    Console.WriteLine(line);
+                    //Read the next line
+                    line = sr.ReadLine();
+                }
+
+                sr.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+        }
     }
 }
