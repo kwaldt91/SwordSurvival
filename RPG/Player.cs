@@ -18,6 +18,9 @@ namespace RPG
         private int level;
         private string attackVerb; //string that represents the action taken when attacking
         private string weapon; //emoticon representing the player's weapon;
+        private int magic;
+        private int maxMP;
+        private int mp;
 
         //Properties///////////
         public string ClassName
@@ -149,6 +152,45 @@ namespace RPG
             }
         }
 
+        public int Magic
+        {
+            get
+            {
+                return magic;
+            }
+
+            set
+            {
+                magic = value;
+            }
+        }
+
+        public int MaxMP
+        {
+            get
+            {
+                return maxMP;
+            }
+
+            set
+            {
+                maxMP = value;
+            }
+        }
+
+        public int Mp
+        {
+            get
+            {
+                return mp;
+            }
+
+            set
+            {
+                mp = value;
+            }
+        }
+
         ///////////////////////////
 
         public void SelectClass()
@@ -158,7 +200,7 @@ namespace RPG
             do
             {
                 input = 0;
-                Console.WriteLine("Select your Class: \n1 = Berserker || 2 = Defender || 3 = Rogue || 4 = Class Descriptions");
+                Console.WriteLine("Select your Class: \n1 = Berserker || 2 = Defender || 3 = Rogue || 4 = Wizard || 5 = Class Descriptions");
 
                 try
                 {
@@ -198,6 +240,16 @@ namespace RPG
                     }
                     else if (input == 4)
                     {
+                        ClassName = "Wizard";
+                        Attack = 100;
+                        MaxHealth = 100;
+                        AttackVerb = "zap";
+                        Weapon = "~~~{O";
+                        Magic = 100;
+                        MaxMP = 100;
+                    }
+                    else if (input == 5)
+                    {
                         Game.ClassDescriptions();
                         SelectClass();
                     }
@@ -207,14 +259,15 @@ namespace RPG
                     } 
                 }
               
-            } while (input != 1 && input != 2 && input != 3 && input != 4);//keep asking until input is valid
+            } while (input != 1 && input != 2 && input != 3 && input != 4 && input != 5);//keep asking until input is valid
 
-            if (input != 4)
+            if (input != 5)
             {
                 Xp = 0;
                 RequiredXP = 100;
                 Level = 1;
                 Health = MaxHealth;
+                Mp = MaxMP;
 
                 Console.WriteLine($"You have chosen the {ClassName} class");
             }
@@ -231,11 +284,13 @@ namespace RPG
             Console.Write(ClassName);
             Console.Write(" " + Weapon);
 
-            Console.ResetColor();            
+            Console.ResetColor();       
+            
+          
             Console.Write(" | Attack: ");
-
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write(Attack);
+                                       
 
             Console.ResetColor();
             Console.Write(" | Health: ");
@@ -271,6 +326,44 @@ namespace RPG
             Console.Write(MaxHealth);
 
             Console.ResetColor();
+
+            if (ClassName == "Wizard")
+            {
+                Console.Write(" | Magic: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write(Magic);
+                Console.ResetColor();
+                Console.Write(" | MP: ");
+                if (Mp > MaxMP / 2)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                }
+                else if (Mp <= MaxMP / 2 && Mp >= MaxMP / 3)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+
+                if (Mp <= 0) // avoids writing negative values to console.
+                {
+                    Console.Write("0");
+                }
+                else
+                {
+                    Console.Write(Mp);
+                }
+
+                Console.ResetColor();
+                Console.Write("/");
+
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.Write(MaxMP);
+                Console.ResetColor();
+            }
+
             Console.Write(" | XP: ");
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -331,7 +424,18 @@ namespace RPG
         public void LoseXP()
         {
             Random rand = new Random();
-            int lostXP = rand.Next(10, Xp/2);
+            int lostXP = 0;
+
+            try
+            {
+                lostXP = rand.Next(10, Xp / 2);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+
+                lostXP = 10;
+            }
+
             Xp -= lostXP;
             Console.ForegroundColor = ConsoleColor.Red;
             Game.LineBreak();
@@ -342,8 +446,10 @@ namespace RPG
 
         public void LevelUp()
         {
-            int addedAtack = 0;
+            int addedAttack = 0;
             int addedHealth = 0;
+            int addedMagic = 0;
+            int addedMp = 0;
             
             Level++;
             Xp = LeftOverXp;//give leftover xp if xp gained surpasses required
@@ -356,29 +462,47 @@ namespace RPG
 
             if (ClassName == "Berserker")
             {
-                addedAtack = 20;
+                addedAttack = 20;
                 addedHealth = 10;
                 
             }
-            else if (this.ClassName == "Defender")
+            else if (ClassName == "Defender")
             {
-                addedAtack = 10;
+                addedAttack = 10;
                 addedHealth = 20;
             }
             else if (ClassName == "Rogue")
             {
-                addedAtack = 15;
+                addedAttack = 15;
                 addedHealth = 15;
             }
+            else if (ClassName == "Wizard")
+            {
+                addedAttack = 15;
+                addedHealth = 15;
+                addedMagic = 15;
+                addedMp = 25;
 
-            Attack += addedAtack;
+                Magic += addedMagic;
+                MaxMP += addedMp;
+                Mp = MaxMP;            
+            }
+
+            Attack += addedAttack;
             MaxHealth += addedHealth;
             Health = MaxHealth;
 
             Game.LineBreak();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"Attack + {addedAtack}");
+            Console.WriteLine($"Attack + {addedAttack}");
             Console.WriteLine($"Health + {addedHealth}");
+
+            if (ClassName == "Wizard")
+            {
+                Console.WriteLine($"Magic + {addedMagic}");
+                Console.WriteLine($"MP + {addedMp}"); 
+            }
+
             Console.ResetColor();
             Game.LineBreak();
         }
@@ -408,5 +532,38 @@ namespace RPG
 
         }
 
+        public void Heal() //this needs work
+        {
+
+            if (Mp >= 25)
+            {
+                Mp -= 25;
+                Random rand = new Random();
+                int amountHealed = rand.Next(10, Magic);
+
+                Console.Write("You recovered ");
+                Console.ForegroundColor = ConsoleColor.Blue;
+
+                if (Health + amountHealed > MaxHealth)
+                {
+                    int remainingHealth = MaxHealth - Health;
+                    Health += remainingHealth;
+                    Console.Write(remainingHealth + " ");
+                }
+                else
+                {
+                    Health += amountHealed;
+                    Console.Write(amountHealed + " ");
+                }
+
+                Console.ResetColor();
+                Console.WriteLine("Health");
+                DisplayHealth();
+            }
+            else
+            {
+                Console.WriteLine("Not enough MP!");
+            }
+        }
     }
 } 

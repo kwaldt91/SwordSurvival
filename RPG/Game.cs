@@ -8,7 +8,7 @@ namespace RPG
 {
     static class Game
     {
-        private static string divider = "------------------------------------------------------------------------";
+        private static string divider = "----------------------------------------------------------------------------------------------------";
         private static int monstersSlain = 0; //Keeps count of enemies defeated
 
         public static void Welcome()
@@ -34,7 +34,7 @@ namespace RPG
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Defender |=_=| : ");
             Console.ResetColor();
-            Console.WriteLine("The Defender is equipped with a giant shield and heavy armor. \nHowever, the giant shield requires two hands, leaving no room for a sword");
+            Console.WriteLine("The Defender is equipped with a giant shield and heavy armor. \nHowever, the giant shield requires two hands, leaving no room for a sword.");
             Console.ForegroundColor = ConsoleColor.Blue;
             LineBreak();
             Console.WriteLine("(Low attack, High defense)");
@@ -44,10 +44,20 @@ namespace RPG
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Rogue <=[==> : ");
             Console.ResetColor();
-            Console.WriteLine("The Rogue wears thick leather armor and is equipped with a light shield and dagger, \nmaking him a well rounded combatant");
+            Console.WriteLine("The Rogue wears thick leather armor and is equipped with a light shield and dagger, \nmaking him a well rounded combatant.");
             Console.ForegroundColor = ConsoleColor.Blue;
             LineBreak();
             Console.WriteLine("(Moderate attack, Moderate defense)");
+            Console.ResetColor();
+            LineBreak();
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Wizard ~~~{O : ");
+            Console.ResetColor();
+            Console.WriteLine("Instead of a blade or similar weapon, the Wizard carries a magical staff, \nwhich can be used to zap his enemies and even restore his health.");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            LineBreak();
+            Console.WriteLine("(Low attack, Low defense, Has healing abilities)");
             Console.ResetColor();
             LineBreak();
         }
@@ -68,13 +78,22 @@ namespace RPG
         public static void FightSequence(Player player, Enemy enemy)
         {
             int input;
+            bool isValid;
             do
             {
                 
                 do
                 {
                     input = 0;
-                    Console.WriteLine("What will you do?: 1 = Attack || 2 = Run!");
+                    isValid = true;
+                    Console.Write("What will you do?: 1 = Attack || 2 = Run!");
+
+                    if (player.ClassName == "Wizard")
+                    {
+                        Console.Write(" || 3 = Heal");
+                    }
+
+                    Console.WriteLine();
                     try
                     {
                         input = int.Parse(Console.ReadLine());
@@ -96,6 +115,36 @@ namespace RPG
                             Console.Write(damageDealt);
                             Console.ResetColor();
                             Console.WriteLine(" damage!");
+
+                        }
+                        else if (input == 2) //Run
+                        {
+                            if (player.Xp >= 10)
+                            {
+                                Console.WriteLine("You ran away...");
+                                player.LoseXP();
+                                player.RecoverHealthFromRun();
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Cant escape! (not enough XP)");
+                                
+                            }
+
+                        }
+                        else if (input == 3 && player.ClassName == "Wizard")
+                        {
+                            player.Heal();                           
+                        }
+                        else
+                        {
+                            DisplayError();
+                            isValid = false;
+                        }
+
+                        if (isValid)
+                        {
                             LineBreak();
                             enemy.DrawEnemy(enemy.EnemyName);
 
@@ -123,11 +172,17 @@ namespace RPG
                                     enemy.DisplayEnemyAttack();
                                     Game.LineBreak();
                                 }
-                                else //avoids displaying negative values in console
+                                else //if player is defeated
                                 {
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Player Health: 0");
                                     Console.ResetColor();
+                                    Console.WriteLine("You were defeated");
+                                    LineBreak();
+                                    WaitForInput();
+                                    Console.Clear();
+                                    player.DisplayStats();
+                                    break;
                                 }
                             }
                             else //if enemy is defeated
@@ -147,48 +202,11 @@ namespace RPG
                                 }
 
                             }
-
-                            if (player.Health <= 0) //if player is defeted break from loop
-                            {
-                                Console.WriteLine("You were defeated");
-                                LineBreak();
-                                WaitForInput();
-                                Console.Clear();
-                                player.DisplayStats();
-                                break;
-                            }
-
-                        }
-                        else if (input == 2) //Run
-                        {
-                            if (player.Xp >= 10)
-                            {
-                                Console.WriteLine("You ran away...");
-                                player.LoseXP();
-                                player.RecoverHealthFromRun();
-                                break;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Cant escape! (not enough XP)");
-                                WaitForInput();
-                                Console.Clear();
-                                player.DisplayStats();
-                                enemy.DrawEnemy(enemy.EnemyName);
-                                enemy.DisplayEnemyHealth();
-                                enemy.DisplayEnemyAttack();
-                                Game.LineBreak();
-                            }
-
-                        }
-                        else
-                        {
-                            DisplayError();
                         } 
                     }
 
                 } while (enemy.Health > 0); 
-            } while (input != 1 && input != 2); //Keep asking for valid input
+            } while (input != 1 && input != 2 && input != 3); //Keep asking for valid input
             
         }//Battle sequence between player and enemy
 

@@ -214,14 +214,13 @@ namespace RPG
                     }
                     else
                     {
-                        Console.Write("=XX=");
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.WriteLine("[X]");
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("X");
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.WriteLine("~)~~~");
                     }
 
                     break;
-
-
 
             }
             
