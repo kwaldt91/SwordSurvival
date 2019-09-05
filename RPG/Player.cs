@@ -542,7 +542,7 @@ namespace RPG
             {
                 Mp -= 25;
                 Random rand = new Random();
-                int amountHealed = rand.Next(10, Magic);
+                int amountHealed = rand.Next(Magic / 2, Magic);
 
                 Console.Write("You recovered ");
                 Console.ForegroundColor = ConsoleColor.Blue;
