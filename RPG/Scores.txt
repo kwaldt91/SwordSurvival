@@ -4,3 +4,10 @@ Bob Johnson              Defender           7                            2
 Gary                     Rogue              16                           4
 Loser Boy                Wizard             2                            1
 Cool Dude                Berserker          0                            1
+Moo                      Wizard             7                            3
+Bob                      Berserker          6                            2
+Gary                     Rogue              7                            3
+Joe                      Defender           12                           3
+Bill                     Berserker          1                            1
+Kevo                     Wizard             1                            1
+Joeseph                  Berserker          8                            3

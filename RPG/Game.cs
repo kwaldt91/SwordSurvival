@@ -15,8 +15,7 @@ namespace RPG
         public static void Welcome()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("D==[=======> SWORD SURVIVIAL <=======}==D");
-            Segment();
+            Console.WriteLine("-----------------------------------D==[=======> SWORD SURVIVIAL <=======}==D--------------------------------------------");           
             Console.ResetColor();
         }//Displays Title on start
 
@@ -71,7 +70,7 @@ namespace RPG
         public static void WaitForInput()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("Press ENTER to continue...");
             Console.ReadLine();
             Console.ResetColor();
         }//Pauses execution until player presses key

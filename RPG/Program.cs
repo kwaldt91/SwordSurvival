@@ -41,7 +41,6 @@ namespace RPG
             Game.GameOver(player); //end game if player chooses not to continue;
         }
 
-        
     }
     
 }
