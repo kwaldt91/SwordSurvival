@@ -11,3 +11,5 @@ Joe                      Defender           12                           3
 Bill                     Berserker          1                            1
 Kevo                     Wizard             1                            1
 Joeseph                  Berserker          8                            3
+Wiz                      Wizard             5                            2
+Damn                     Wizard             9                            3
