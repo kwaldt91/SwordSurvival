@@ -13,4 +13,4 @@ Kevo                     Wizard             1                            1
 Joeseph                  Berserker          8                            3
 Wiz                      Wizard             5                            2
 Damn                     Wizard             9                            3
-
+Jerry                    Wizard             0                            1
