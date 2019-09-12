@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Media;
 
 namespace RPG
 {
@@ -77,6 +78,7 @@ namespace RPG
        
         public static void FightSequence(Player player, Enemy enemy)
         {
+            
             int input;
             bool isValid;
             do
@@ -174,6 +176,9 @@ namespace RPG
                                 }
                                 else //if player is defeated
                                 {
+                                    string defeatSongPath = Path.GetFullPath("Defeat.wav");
+                                    SoundPlayer defeatSong = new SoundPlayer(defeatSongPath);
+                                    defeatSong.PlayLooping();
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Player Health: 0");
                                     Console.ResetColor();
@@ -187,6 +192,7 @@ namespace RPG
                             }
                             else //if enemy is defeated
                             {
+
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Enemy Health: 0");
                                 Console.ResetColor();
@@ -197,8 +203,8 @@ namespace RPG
                                 monstersSlain++;
 
                                 if (player.Xp >= player.RequiredXP)
-                                {
-                                    player.LevelUp();
+                                {                                 
+                                    player.LevelUp();                                                                
                                 }
 
                             }
@@ -290,8 +296,10 @@ namespace RPG
             int spaceRemaining = 0;
             try
             {
-                StreamWriter sw = new StreamWriter("C:\\Learning\\RPG\\RPG\\Scores.txt", true);
-
+                string fullpath = Path.GetFullPath("Scores.txt");
+                //StreamWriter sw = new StreamWriter("C:\\Learning\\RPG\\RPG\\Scores.txt", true);
+                StreamWriter sw = new StreamWriter(fullpath, true);
+                 
                 sw.Write(name);
                 spaceRemaining = spaces - name.Length;
 
@@ -334,8 +342,9 @@ namespace RPG
         {
             string line;
             try
-            {         
-                StreamReader sr = new StreamReader("C:\\Learning\\RPG\\RPG\\Scores.txt");            
+            {
+                string fullpath = Path.GetFullPath("Scores.txt");
+                StreamReader sr = new StreamReader(fullpath);            
                 line = sr.ReadLine();
  
                 while (line != null)

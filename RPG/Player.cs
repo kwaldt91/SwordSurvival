@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Media;
+using System.IO;
 namespace RPG
 {
     class Player
@@ -21,6 +22,11 @@ namespace RPG
         private int magic;
         private int maxMP;
         private int mp;
+        private bool gainedLevel = false;
+
+        //Sounds
+        private static string slashPath = Path.GetFullPath("slash.wav");
+        SoundPlayer slash = new SoundPlayer(slashPath);
 
         //Properties///////////
         public string ClassName
@@ -188,6 +194,19 @@ namespace RPG
             set
             {
                 mp = value;
+            }
+        }
+
+        public bool GainedLevel
+        {
+            get
+            {
+                return gainedLevel;
+            }
+
+            set
+            {
+                gainedLevel = value;
             }
         }
 
@@ -403,6 +422,7 @@ namespace RPG
             int damage = rand.Next(Attack / 2, Attack);
 
             enemy.Health -= damage; //random damage based on Attack stat
+            slash.Play(); // get this to play overtop
 
             return damage;
         }
@@ -449,6 +469,7 @@ namespace RPG
 
         public void LevelUp()
         {
+            GainedLevel = true;
             int addedAttack = 0;
             int addedHealth = 0;
             int addedMagic = 0;
