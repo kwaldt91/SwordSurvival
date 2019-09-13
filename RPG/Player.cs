@@ -24,10 +24,6 @@ namespace RPG
         private int mp;
         private bool gainedLevel = false;
 
-        //Sounds
-        private static string slashPath = Path.GetFullPath("slash.wav");
-        SoundPlayer slash = new SoundPlayer(slashPath);
-
         //Properties///////////
         public string ClassName
         {
@@ -422,8 +418,7 @@ namespace RPG
             int damage = rand.Next(Attack / 2, Attack);
 
             enemy.Health -= damage; //random damage based on Attack stat
-            //slash.Play(); // get this to play overtop
-
+            
             return damage;
         }
 

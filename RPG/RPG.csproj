@@ -76,7 +76,6 @@
     <Content Include="Sounds\GameOver.wav" />
     <Content Include="Sounds\BattleSong2.wav" />
     <Content Include="Sounds\LevelUp.wav" />
-    <Content Include="Sounds\slash.wav" />
     <Content Include="Sounds\Victory.wav" />
   </ItemGroup>
   <ItemGroup>
