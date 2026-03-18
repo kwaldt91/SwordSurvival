@@ -222,6 +222,28 @@ namespace RPG
 
                     break;
 
+                case "Dragon":
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    if (Health > 0)
+                    {
+                        Console.Write(">={");
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write("oo");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("}=>~");
+                    }
+                    else
+                    {
+                        Console.Write(">={");
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write("xx");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("}=>~");
+                    }
+
+                    break;
+
             }
             
         }//Displays the enemy (emoji)
@@ -290,11 +312,18 @@ namespace RPG
                     EnemyName = "Cursed Hammer";
                     break;
 
-                default:
+                case 9:
                     monsterAttack = rand.Next(225, 250);
                     monsterHealth = rand.Next(325, 350);
-                    monsterXp = rand.Next(225, 250); ;
+                    monsterXp = rand.Next(225, 250);
                     EnemyName = "Cursed Staff";
+                    break;
+
+                default:
+                    monsterAttack = rand.Next(275, 325);
+                    monsterHealth = rand.Next(400, 450);
+                    monsterXp = rand.Next(275, 325);
+                    EnemyName = "Dragon";
                     break;
 
             }
