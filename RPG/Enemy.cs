@@ -85,6 +85,19 @@ namespace RPG
 
             switch(enemyName)
             {
+                case "Little Worm":
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    if (Health > 0)
+                    {
+                        Console.WriteLine("~(o)~");
+                    }
+                    else
+                    {
+                        Console.WriteLine("~(x)~");
+                    }
+                    break;
+
                 case "Dumb Fish":
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -235,55 +248,62 @@ namespace RPG
             switch (player.Level)
             {
                 case 1:
+                    monsterAttack = rand.Next(5, 20);
+                    monsterHealth = rand.Next(50, 100);
+                    monsterXp = rand.Next(5, 20);
+                    EnemyName = "Little Worm";
+                    break;
+
+                case 2:
                     monsterAttack = rand.Next(25, 50);
                     monsterHealth = rand.Next(125, 150);
                     monsterXp = rand.Next(25, 50);
                     EnemyName = "Dumb Fish";
                     break;
 
-                case 2:
+                case 3:
                     monsterAttack = rand.Next(50, 75);
                     monsterHealth = rand.Next(150, 175);
                     monsterXp = rand.Next(50, 75);
                     EnemyName = "Spider";
                     break;
 
-                case 3:
+                case 4:
                     monsterAttack = rand.Next(75, 100);
                     monsterHealth = rand.Next(175, 200);
                     monsterXp = rand.Next(75, 100);
                     EnemyName = "Bat";
                     break;
 
-                case 4:
+                case 5:
                     monsterAttack = rand.Next(100, 125);
                     monsterHealth = rand.Next(200, 225);
                     monsterXp = rand.Next(100, 125);
                     EnemyName = "Owl";
                     break;
 
-                case 5:
+                case 6:
                     monsterAttack = rand.Next(125, 150);
                     monsterHealth = rand.Next(225, 250);
                     monsterXp = rand.Next(125, 150);
                     EnemyName = "Goblin";
                     break;
 
-                case 6:
+                case 7:
                     monsterAttack = rand.Next(150, 175);
                     monsterHealth = rand.Next(250, 275);
                     monsterXp = rand.Next(150, 175); ;
                     EnemyName = "Robot";
                     break;
 
-                case 7:
+                case 8:
                     monsterAttack = rand.Next(175, 200);
                     monsterHealth = rand.Next(275, 300);
                     monsterXp = rand.Next(175, 200); ;
                     EnemyName = "Cursed Sword";
                     break;
 
-                case 8:
+                case 9:
                     monsterAttack = rand.Next(200, 225);
                     monsterHealth = rand.Next(300, 325);
                     monsterXp = rand.Next(200, 225); ;
