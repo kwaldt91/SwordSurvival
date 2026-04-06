@@ -1,1 +1,1 @@
-﻿Player Name-------------------------Class-------------------------Monsters Slain-------------------------Level Reached
+﻿Player Name                   Class               Monsters Slain      Level Reached
