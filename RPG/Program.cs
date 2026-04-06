@@ -16,26 +16,15 @@ namespace RPG
         static void Main(string[] args)
         {
             int songCounter = 0;
-            string introSongPath = Path.GetFullPath("Intro.wav");
-            SoundPlayer introSong = new SoundPlayer(introSongPath);
 
-            string battlSongPath = Path.GetFullPath("BattleSong.wav");
-            SoundPlayer battleSong = new SoundPlayer(battlSongPath);
+            string basePath = $"{AppDomain.CurrentDomain.BaseDirectory}Sounds";
 
-            string battlSong2Path = Path.GetFullPath("BattleSong2.wav");
-            SoundPlayer battleSong2 = new SoundPlayer(battlSong2Path);
-
-            string victorySongPath = Path.GetFullPath("Victory.wav");
-            SoundPlayer victorySong = new SoundPlayer(victorySongPath);
-
-
-            string gameOverSongPath = Path.GetFullPath("GameOver.wav");
-            SoundPlayer gameOverSong = new SoundPlayer(gameOverSongPath);
-
-            string levelUpSongPath = Path.GetFullPath("LevelUp.wav");
-            SoundPlayer levelUpSong = new SoundPlayer(levelUpSongPath);
-
-
+            SoundPlayer introSong = new SoundPlayer(Path.Combine(basePath, "Intro.wav"));
+            SoundPlayer battleSong = new SoundPlayer(Path.Combine(basePath, "BattleSong.wav"));
+            SoundPlayer battleSong2 = new SoundPlayer(Path.Combine(basePath, "BattleSong2.wav"));
+            SoundPlayer victorySong = new SoundPlayer(Path.Combine(basePath, "Victory.wav"));
+            SoundPlayer gameOverSong = new SoundPlayer(Path.Combine(basePath, "GameOver.wav"));
+            SoundPlayer levelUpSong = new SoundPlayer(Path.Combine(basePath, "LevelUp.wav"));
 
             Player player = new Player();
             introSong.PlayLooping();

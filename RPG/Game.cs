@@ -12,6 +12,8 @@ namespace RPG
     {
         private static string divider = "----------------------------------------------------------------------------------------------------";
         private static int monstersSlain = 0; //Keeps count of enemies defeated
+        private const string scoreLineFormat = "{0,-28}  {1,-18}  {2,-18}  {3,-15}";
+        private static readonly string scoreHeader = FormatScoreLine("Player Name", "Class", "Monsters Slain", "Level Reached");
 
         public static void Welcome()
         {
@@ -176,8 +178,8 @@ namespace RPG
                                 }
                                 else //if player is defeated
                                 {
-                                    string defeatSongPath = Path.GetFullPath("Defeat.wav");
-                                    SoundPlayer defeatSong = new SoundPlayer(defeatSongPath);
+                                    string basePath = $"{AppDomain.CurrentDomain.BaseDirectory}Sounds";
+                                    SoundPlayer defeatSong = new SoundPlayer(Path.Combine(basePath, "Defeat.wav"));
                                     defeatSong.PlayLooping();
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Player Health: 0");
@@ -290,47 +292,45 @@ namespace RPG
             LineBreak();
         }//Displays error to user if input is invalid
 
+        private static string FormatScoreLine(string name, string className, string monstersSlain, string levelReached)
+        {
+            return string.Format(scoreLineFormat, name, className, monstersSlain, levelReached);
+        }
+
+        private static void EnsureScoresFile(string fullpath)
+        {
+            if (!File.Exists(fullpath))
+            {
+                File.WriteAllText(fullpath, scoreHeader + Environment.NewLine);
+                return;
+            }
+
+            string[] lines = File.ReadAllLines(fullpath);
+
+            if (lines.Length == 0)
+            {
+                File.WriteAllText(fullpath, scoreHeader + Environment.NewLine);
+                return;
+            }
+
+            if (lines[0] != scoreHeader)
+            {
+                lines[0] = scoreHeader;
+                File.WriteAllLines(fullpath, lines);
+            }
+        }
+
         public static void WriteScore(string name, string className, int monstersSlain, int levelReached)
         {
-            int spaces = 25;
-            int spaceRemaining = 0;
             try
             {
                 string fullpath = Path.GetFullPath("Scores.txt");
-                //StreamWriter sw = new StreamWriter("C:\\Learning\\RPG\\RPG\\Scores.txt", true);
-                StreamWriter sw = new StreamWriter(fullpath, true);
-                 
-                sw.Write(name);
-                spaceRemaining = spaces - name.Length;
+                EnsureScoresFile(fullpath);
 
-                for(int i = 0; i < spaceRemaining; i++)
+                using (StreamWriter sw = new StreamWriter(fullpath, true))
                 {
-                    sw.Write(" ");
+                    sw.WriteLine(FormatScoreLine(name, className, monstersSlain.ToString(), levelReached.ToString()));
                 }
-
-                sw.Write(className);
-
-                spaces = 19;
-                spaceRemaining = spaces - className.Length;
-
-                for (int j = 0; j < spaceRemaining; j++)
-                {
-                    sw.Write(" ");
-                }
-
-                spaces = 29;
-                spaceRemaining = spaces - monstersSlain.ToString().Length;
-
-                sw.Write(monstersSlain);
-
-                for (int k = 0; k < spaceRemaining; k++)
-                {
-                    sw.Write(" ");
-                }
-
-                sw.WriteLine(levelReached);
-
-                sw.Close();
             }
             catch(Exception e)
             {
@@ -340,21 +340,15 @@ namespace RPG
 
         public static void ReadScores()
         {
-            string line;
             try
             {
                 string fullpath = Path.GetFullPath("Scores.txt");
-                StreamReader sr = new StreamReader(fullpath);            
-                line = sr.ReadLine();
- 
-                while (line != null)
+                EnsureScoresFile(fullpath);
+
+                foreach (string line in File.ReadLines(fullpath))
                 {                 
                     Console.WriteLine(line);
-                    //Read the next line
-                    line = sr.ReadLine();
                 }
-
-                sr.Close();
             }
             catch (Exception e)
             {
