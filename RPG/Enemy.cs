@@ -235,6 +235,20 @@ namespace RPG
 
                     break;
 
+                case "Bear":
+
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    if (Health > 0)
+                    {
+                        Console.WriteLine("W(oo)W");
+                    }
+                    else
+                    {
+                        Console.WriteLine("W(xx)W");
+                    }
+
+                    break;
+
             }
             
         }//Displays the enemy (emoji)
@@ -310,11 +324,18 @@ namespace RPG
                     EnemyName = "Cursed Hammer";
                     break;
 
-                default:
+                case 10:
                     monsterAttack = rand.Next(225, 250);
                     monsterHealth = rand.Next(325, 350);
-                    monsterXp = rand.Next(225, 250); ;
+                    monsterXp = rand.Next(225, 250);
                     EnemyName = "Cursed Staff";
+                    break;
+
+                default:
+                    monsterAttack = rand.Next(250, 275);
+                    monsterHealth = rand.Next(350, 375);
+                    monsterXp = rand.Next(250, 275);
+                    EnemyName = "Bear";
                     break;
 
             }
